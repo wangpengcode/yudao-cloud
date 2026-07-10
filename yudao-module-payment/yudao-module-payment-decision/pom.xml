@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>cn.iocoder.cloud</groupId>
+        <artifactId>yudao-module-payment</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <modules>
+        <module>yudao-module-payment-decision-api</module>
+        <module>yudao-module-payment-decision-server</module>
+    </modules>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>yudao-module-payment-decision</artifactId>
+    <packaging>pom</packaging>
+
+    <name>${project.artifactId}</name>
+    <description>
+        支付系统 - ③ 路由决策层：软路由/硬路由 + 风控规则引擎
+    </description>
+
+</project>

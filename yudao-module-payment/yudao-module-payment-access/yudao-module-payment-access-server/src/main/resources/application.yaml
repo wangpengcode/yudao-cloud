@@ -1,0 +1,93 @@
+spring:
+  application:
+    name: payment-access-server
+
+  profiles:
+    active: local
+
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+
+  config:
+    import:
+      - optional:classpath:application-${spring.profiles.active}.yaml
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}.yaml
+
+  servlet:
+    multipart:
+      max-file-size: 16MB
+      max-request-size: 32MB
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+      write-date-timestamps-as-nanoseconds: false
+      write-durations-as-timestamps: true
+      fail-on-empty-beans: false
+
+  cache:
+    type: REDIS
+    redis:
+      time-to-live: 1h
+
+server:
+  port: 48091
+
+logging:
+  file:
+    name: ${user.home}/logs/${spring.application.name}.log
+
+--- #################### 接口文档配置 ####################
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui
+  default-flat-param-object: true
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+spring:
+  data:
+    redis:
+      repositories:
+        enabled: false
+
+easy-trans:
+  is-enable-global: false
+
+--- #################### 消息队列相关配置 ####################
+
+rocketmq:
+  producer:
+    group: ${spring.application.name}_PRODUCER
+
+--- #################### 芋道相关配置 ####################
+
+yudao:
+  info:
+    version: 1.0.0
+    base-package: cn.iocoder.yudao.module.payment.access
+  web:
+    admin-ui:
+      url: http://dashboard.yudao.iocoder.cn
+  xss:
+    enable: false
+    exclude-urls:
+      - ${management.endpoints.web.base-path}/**
+  swagger:
+    title: 支付系统-access
+    description: 支付系统access层服务
+    version: ${yudao.info.version}
+  tenant:
+    enable: true
+    ignore-urls:
+
+debug: false

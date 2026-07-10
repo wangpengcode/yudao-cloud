@@ -1,0 +1,60 @@
+--- #################### 注册中心 + 配置中心 ####################
+
+spring:
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      username: nacos
+      password: nacos
+      discovery:
+        namespace: dev
+        group: DEFAULT_GROUP
+        metadata:
+          version: 1.0.0
+      config:
+        namespace: dev
+        group: DEFAULT_GROUP
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+
+--- #################### 服务保障 ####################
+
+lock4j:
+  acquire-timeout: 3000
+  expire: 30000
+
+--- #################### 监控 ####################
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: '*'
+
+spring:
+  boot:
+    admin:
+      client:
+        instance:
+          service-host-type: IP
+        username: admin
+        password: admin
+
+logging:
+  level:
+    org.springframework.context.support.PostProcessorRegistrationDelegate: ERROR
+
+--- #################### 芋道配置 ####################
+
+yudao:
+  env:
+    tag: ${HOSTNAME}
+  security:
+    mock-enable: true
+  access-log:
+    enable: false
+  demo: false

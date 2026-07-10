@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>cn.iocoder.cloud</groupId>
+        <artifactId>yudao</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <modules>
+        <module>yudao-module-payment-common</module>
+        <module>yudao-module-payment-access</module>
+        <module>yudao-module-payment-integration</module>
+        <module>yudao-module-payment-decision</module>
+        <module>yudao-module-payment-domain</module>
+        <module>yudao-module-payment-support</module>
+        <module>yudao-module-payment-admin</module>
+    </modules>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>yudao-module-payment</artifactId>
+    <packaging>pom</packaging>
+
+    <name>${project.artifactId}</name>
+    <description>
+        支付系统分层微服务：接入层、编排层、决策层、领域层、支撑层、运营层
+    </description>
+
+</project>

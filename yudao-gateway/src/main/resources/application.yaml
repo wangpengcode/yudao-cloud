@@ -94,19 +94,20 @@ spring:
           uri: grayLb://report-server
           predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
             - Path=/jmreport/**, /drag/**, /jimubi/**
-        ## pay-server 服务
-        - id: pay-admin-api # 路由的编号
-          uri: grayLb://pay-server
-          predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
-            - Path=/admin-api/pay/**
+        ## payment-access-server 服务（支付接入层）
+        - id: payment-access-admin-api
+          uri: grayLb://payment-access-server
+          predicates:
+            - Path=/admin-api/payment/access/**
           filters:
-            - RewritePath=/admin-api/pay/v3/api-docs, /v3/api-docs # 配置，保证转发到 /v3/api-docs
-        - id: pay-app-api # 路由的编号
-          uri: grayLb://pay-server
-          predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
-            - Path=/app-api/pay/**
+            - RewritePath=/admin-api/payment/access/v3/api-docs, /v3/api-docs
+        ## payment-admin-server 服务（支付运营层）
+        - id: payment-admin-api
+          uri: grayLb://payment-admin-server
+          predicates:
+            - Path=/admin-api/payment/admin/**
           filters:
-            - RewritePath=/app-api/pay/v3/api-docs, /v3/api-docs
+            - RewritePath=/admin-api/payment/admin/v3/api-docs, /v3/api-docs
         ## mp-server 服务
         - id: mp-admin-api # 路由的编号
           uri: grayLb://mp-server
@@ -242,9 +243,12 @@ knife4j:
       - name: bpm-server
         service-name: bpm-server
         url: /admin-api/bpm/v3/api-docs
-      - name: pay-server
-        service-name: pay-server
-        url: /admin-api/pay/v3/api-docs
+      - name: payment-access-server
+        service-name: payment-access-server
+        url: /admin-api/payment/access/v3/api-docs
+      - name: payment-admin-server
+        service-name: payment-admin-server
+        url: /admin-api/payment/admin/v3/api-docs
       - name: mp-server
         service-name: mp-server
         url: /admin-api/mp/v3/api-docs
